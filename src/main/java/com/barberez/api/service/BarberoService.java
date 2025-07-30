@@ -5,6 +5,7 @@ import com.barberez.api.repository.BarberoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BarberoService {
@@ -22,4 +23,13 @@ public class BarberoService {
     public Barbero guardar(Barbero barbero) {
         return repositorio.save(barbero);
     }
+
+    public void eliminar(Long id) {
+        repositorio.deleteById(id);
+    }
+
+    public Optional<Barbero> obtenerPorId(Long id) {
+        return repositorio.findById(id);
+    }
+
 }

@@ -3,6 +3,7 @@ package com.barberez.api.controller;
 import com.barberez.api.model.Barbero;
 import com.barberez.api.service.BarberoService;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,4 +27,19 @@ public class BarberoController {
     public Barbero guardar(@RequestBody Barbero barbero) {
         return servicio.guardar(barbero);
     }
+
+    @DeleteMapping("/eliminar/{id}")
+    public void eliminarBarbero(@PathVariable Long id) {
+        servicio.eliminar(id);
+    }
+
+    @GetMapping("/buscar/{id}")
+    public ResponseEntity<Barbero> obtenerPorId(@PathVariable Long id) {
+        return servicio.obtenerPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+
+
 }
