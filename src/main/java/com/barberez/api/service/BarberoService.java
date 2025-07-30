@@ -32,4 +32,15 @@ public class BarberoService {
         return repositorio.findById(id);
     }
 
+    public Barbero actualizar(Long id, Barbero nuevosDatos) {
+        return repositorio.findById(id).map(barbero -> {
+            barbero.setNombre(nuevosDatos.getNombre());
+            barbero.setApellido(nuevosDatos.getApellido());
+            barbero.setCorreo(nuevosDatos.getCorreo());
+            barbero.setTelefono(nuevosDatos.getTelefono());
+            return repositorio.save(barbero);
+        }).orElseThrow(() -> new RuntimeException("Barbero no encontrado con ID: " + id));
+    }
+
+
 }

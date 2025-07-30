@@ -40,4 +40,9 @@ public class CitaController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/editar/{id}")
+    public ResponseEntity<Cita> actualizarCita(@PathVariable Long id, @RequestBody Cita nuevosDatos) {
+        Cita actualizado = servicio.actualizar(id, nuevosDatos);
+        return ResponseEntity.ok(actualizado);
+    }
 }

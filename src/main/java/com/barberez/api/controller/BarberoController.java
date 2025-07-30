@@ -40,6 +40,11 @@ public class BarberoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/editar/{id}")
+    public ResponseEntity<Barbero> actualizarBarbero(@PathVariable Long id, @RequestBody Barbero nuevosDatos) {
+        Barbero actualizado = servicio.actualizar(id, nuevosDatos);
+        return ResponseEntity.ok(actualizado);
+    }
 
 
 }

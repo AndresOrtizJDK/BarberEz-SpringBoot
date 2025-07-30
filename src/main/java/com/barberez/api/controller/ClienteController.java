@@ -42,4 +42,10 @@ public class ClienteController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/editar/{id}")
+    public ResponseEntity<Cliente> actualizarCliente(@PathVariable Long id, @RequestBody Cliente nuevosDatos) {
+        Cliente actualizado = servicio.actualizar(id, nuevosDatos);
+        return ResponseEntity.ok(actualizado);
+    }
+
 }

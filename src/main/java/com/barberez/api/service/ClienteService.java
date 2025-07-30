@@ -29,4 +29,15 @@ public class ClienteService {
     public Optional<Cliente> obtenerPorId(Long id) {
         return repositorio.findById(id);
     }
+
+    public Cliente actualizar(Long id, Cliente nuevosDatos) {
+        return repositorio.findById(id).map(cliente -> {
+            cliente.setNombre(nuevosDatos.getNombre());
+            cliente.setApellido(nuevosDatos.getApellido());
+            cliente.setCorreo(nuevosDatos.getCorreo());
+            cliente.setTelefono(nuevosDatos.getTelefono());
+            cliente.setFecha_nacimiento(nuevosDatos.getFecha_nacimiento());
+            return repositorio.save(cliente);
+        }).orElseThrow(() -> new RuntimeException("Cliente no encontrado con ID: " + id));
+    }
 }
