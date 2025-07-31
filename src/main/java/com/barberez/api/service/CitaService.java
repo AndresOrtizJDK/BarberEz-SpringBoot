@@ -23,6 +23,20 @@ public class CitaService {
     }
 
     public Cita guardar(Cita cita) {
+        List<Cita> citasDelDia = repositorio.findByBarberoIdAndFecha(
+                cita.getBarbero().getId(), cita.getFecha()
+        );
+
+        for (Cita existente : citasDelDia) {
+            long minutos = Math.abs(java.time.Duration.between(
+                    existente.getHora(), cita.getHora()
+            ).toMinutes());
+
+            if (minutos < 30) {
+                throw new IllegalArgumentException("El barbero ya tiene una cita muy cercana a esa hora. Debe haber al menos 30 minutos de diferencia.");
+            }
+        }
+
         return repositorio.save(cita);
     }
 
